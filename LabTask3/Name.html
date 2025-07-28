@@ -4,9 +4,9 @@
   <title>Name</title>
 </head>
 <body>
-<form method="post" onsubmit="return validateName()">
+<form method="post" onsubmit="return validateName(true)">
   Name<br>
-  <input type="text" name="name" value="" id="name" onblur="validateName()" required><br>
+  <input type="text" name="name" id="name" onblur="validateName()" required><br>
   <p id="nameError"></p>
   
   <div style="margin-top: 25px;">
@@ -17,40 +17,45 @@
 <script>
 let nameError = document.getElementById("nameError");
 
-function validateName() {
+function validateName(isSubmit=false) {
   let name = document.getElementById("name").value.trim();
+  let words = name.split(" ").filter(word => word !== "");
 
-  if(name === "") {
+  if (name == "") {
     nameError.textContent = "Name cannot be empty";
     nameError.style.color = "red";
     return false;
   }
-
-  let words = name.split(" ").filter(word => word !== "");
-  if(words.length < 2) {
+  else if (words.length < 2) {
     nameError.textContent = "Contains at least two words";
     nameError.style.color = "red";
     return false;
   }
-  let firstChar = name.charCodeAt(0);
-  if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
-    nameError.textContent = "Name must start with a letter";
-    nameError.style.color = "red";
-    return false;
+  else {
+    let firstChar = name.charCodeAt(0);
+    if (!((firstChar >= 65 && firstChar <= 90) || (firstChar >= 97 && firstChar <= 122))) {
+      nameError.textContent = "Name must start with a letter";
+      nameError.style.color = "red";
+      return false;
+    }
+    else {
+      for (let i = 0; i < name.length; i++) {
+        let ch = name.charCodeAt(i);
+        if (ch >= 48 && ch <= 57) {
+          nameError.textContent = "Name cannot contain numbers";
+          nameError.style.color = "red";
+          return false;
+        }
+      }
+    }
   }
-  
-  for (let i = 0; i < name.length; i++) {
-  let ch = name.charCodeAt(i);
-  if (ch >= 48 && ch <= 57) {
-    nameError.textContent = "Name cannot contain numbers";
-    nameError.style.color = "red";
-    return false;
-  }
-}
-
-  
-  return true;
   nameError.textContent = "";
+
+ if (isSubmit) {
+    alert("Form submitted successfully!");
+    return true;
+  }
+  return false;
 }
 </script>
 

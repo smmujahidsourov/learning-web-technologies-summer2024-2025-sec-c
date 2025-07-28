@@ -1,5 +1,53 @@
-<form>
-  Email<br><input type="email" value="">
-  <button type="button" style="color:blue; border-radius: 2px; border-color: blue; cursor: pointer;" >i</button>
-  <div style="padding: 5px 5px 5px 0px ;"><button>Submit</button></div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Validation</title>
+</head>
+<body>
+
+<form method="post" onsubmit="return validateEmail(true)">
+  Email<br>
+  <input type="email" id="email" onblur="validateEmail()" required>
+
+   <button type="button" id="ibutton"
+          style="color:blue; border-radius: 2px; border-color: blue; cursor: pointer;" 
+          title="Enter a valid email like: example@domain.com">i</button>
+
+  <p id="emailError"></p>
+
+  <div style="padding: 5px 5px 5px 0px;">
+    <button type="submit">Submit</button>
+  </div>
 </form>
+
+<script>
+let emailError = document.getElementById("emailError");
+
+function validateEmail(isSubmit = false) {
+  let email = document.getElementById("email").value.trim();
+
+  if(email === "") {
+    emailError.textContent = "Email cannot be empty";
+    emailError.style.color = "red";
+    return false;
+  } 
+  if(!email.includes('@') ||!email.includes('.')|| !email.endsWith('com') )
+  {
+    emailError.textContent = "Enter Valid Email";
+    emailError.style.color = "red";
+    return false;
+
+  }
+
+  emailError.textContent = "";
+
+  if (isSubmit) {
+    alert("Email submitted successfully!");
+    return true;
+  }
+  return false;
+}
+</script>
+
+</body>
+</html>
