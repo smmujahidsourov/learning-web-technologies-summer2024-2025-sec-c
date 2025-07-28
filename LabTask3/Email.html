@@ -22,6 +22,7 @@
 
 <script>
 let emailError = document.getElementById("emailError");
+    
 
 function validateEmail(isSubmit = false) {
   let email = document.getElementById("email").value.trim();
@@ -31,12 +32,29 @@ function validateEmail(isSubmit = false) {
     emailError.style.color = "red";
     return false;
   } 
-  if(!email.includes('@') ||!email.includes('.')|| !email.endsWith('com') )
-  {
+
+  let atPos = email.indexOf("@");
+  let dotPos = email.lastIndexOf(".");
+
+  if(!email.includes('@') || !email.endsWith('.com') || email.indexOf(".com") !== dotPos ) {
     emailError.textContent = "Enter Valid Email";
     emailError.style.color = "red";
     return false;
+  }
 
+  let domain = email.substring(atPos+1, dotPos);
+  if (domain.length < 1) {
+    emailError.textContent = "Enter Valid Email";
+    emailError.style.color = "red";
+    return false;
+  }
+
+  let firstCom = email.indexOf(".com");
+  let lastCom = email.lastIndexOf(".com");
+  if (firstCom !== lastCom) {
+    emailError.textContent = "Enter Valid Email";
+    emailError.style.color = "red";
+    return false;
   }
 
   emailError.textContent = "";
