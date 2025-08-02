@@ -1,22 +1,53 @@
-<form>
+<form method="post" onsubmit="return validateDOB(true);">
   <fieldset>
     <legend>
       Date of Birth
     </legend>
     <table>
-    <tr>
-      <th>dd</th>
-      <th>mm</th>
-      <th>yyyy</th>
-    </tr>
-    <tr>
-    <td><input type="text" id="day" size="5"  value="">/</td>
-    <td><input type="text" id="month" size=5 value="">/</td>
-    <td><input type="text" id="year"  size="5 value=""></td>
-    </tr>
-
+      <tr>
+        <th>dd</th>
+        <th>mm</th>
+        <th>yyyy</th>
+      </tr>
+      <tr>
+        <td><input type="text" id="day" size="5" value="" required />/</td>
+        <td><input type="text" id="month" size="5" value="" required />/</td>
+        <td><input type="text" id="year" size="5" value="" required /></td>
+      </tr>
+      <tr>
+        <td colspan="3"><span id="DOBerror" style="color: red;"></span></td>
+      </tr>
     </table>
-
-
-<div style="padding: 5px 5px 5px 0px ;"><button>Submit</button></div>  </fieldset>
+    <div style="padding: 5px 5px 5px 0px;">
+      <button type="submit">Submit</button>
+    </div>
+  </fieldset>
 </form>
+
+<script>
+  function validateDOB(isSubmit = true) {
+    let DOBerror = document.getElementById("DOBerror");
+    let day = document.getElementById("day").value.trim();
+    let month = document.getElementById("month").value.trim();
+    let year = document.getElementById("year").value.trim();
+
+    if (day < 1 || day > 31) {
+      DOBerror.textContent = "Day must be between 1 and 31.";
+      return false;
+    }
+    if (month < 1 || month > 12) {
+      DOBerror.textContent = "Month must be between 1 and 12.";
+      return false;
+    }
+    if (year.length !== 4) {
+      DOBerror.textContent = "Year must be a 4-digit number.";
+      return false;
+    }
+    DOBerror.textContent = "";
+   if (isSubmit) {
+    alert("Form submitted successfully!");
+    return true;
+  }
+  return false;
+  }
+</script>

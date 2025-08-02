@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+</head>
+<body>
+  <div id="myDIV">
+
+    <input type="text" id="display" readonly>
+
+  </div>
+</body>
+</html>
+
+<script>
+
+let display= document.getElementById("display");
+let value="";
+
+const btn15 = document.createElement("button");
+btn15.innerHTML = "AC";
+btn15.addEventListener("click", function(){
+addToDisplay('AC');
+});
+document.body.appendChild(btn15);
+
+const btn17 = document.createElement("button");
+btn17.innerHTML = "+/-";
+document.body.appendChild(btn17);
+
+const btn18 = document.createElement("button");
+btn18.innerHTML = "%";
+btn18.addEventListener("click", function(){
+addToDisplay('%');
+});
+document.body.appendChild(btn18);
+
+const btn10 = document.createElement("button");
+btn10.innerHTML = "/";
+btn10.addEventListener("click", function(){
+addToDisplay('/');
+});
+document.body.appendChild(btn10);
+
+document.body.appendChild(document.createElement("br"));
+
+
+const btn = document.createElement("button");
+btn.innerHTML = "1";
+btn.addEventListener("click", function(){
+addToDisplay('1');
+});
+document.body.appendChild(btn);
+
+const btn2 = document.createElement("button");
+btn2.innerHTML = "2";
+btn2.addEventListener("click", function(){
+addToDisplay('2');
+});
+document.body.appendChild(btn2);
+
+const btn3 = document.createElement("button");
+btn3.innerHTML = "3";
+btn3.addEventListener("click", function(){
+addToDisplay('3');
+});
+document.body.appendChild(btn3);
+
+const btn11 = document.createElement("button");
+btn11.innerHTML = "*";
+btn11.addEventListener("click", function(){
+addToDisplay('*');
+});
+document.body.appendChild(btn11);
+document.body.appendChild(document.createElement("br"));
+
+const btn4 = document.createElement("button");
+btn4.innerHTML = "4";
+btn4.addEventListener("click", function(){
+addToDisplay('4');
+});
+
+document.body.appendChild(btn4);
+
+
+
+
+const btn5 = document.createElement("button");
+btn5.innerHTML = "5";
+btn5.addEventListener("click", function(){
+addToDisplay('5');
+});
+document.body.appendChild(btn5);
+
+const btn6 = document.createElement("button");
+btn6.innerHTML = "6";
+btn6.addEventListener("click", function(){
+addToDisplay('6');
+});
+document.body.appendChild(btn6);
+
+const btn12 = document.createElement("button");
+btn12.innerHTML = "-";
+btn12.addEventListener("click", function(){
+addToDisplay('-');
+});
+document.body.appendChild(btn12);
+
+document.body.appendChild(document.createElement("br"));
+
+
+const btn7 = document.createElement("button");
+btn7.innerHTML = "7";
+btn7.addEventListener("click", function(){
+addToDisplay('7');
+});
+document.body.appendChild(btn7);
+
+const btn8 = document.createElement("button");
+btn8.innerHTML = "8";
+btn8.addEventListener("click", function(){
+addToDisplay('8');
+});
+document.body.appendChild(btn8);
+
+const btn9 = document.createElement("button");
+btn9.innerHTML = "9";
+btn9.addEventListener("click", function(){
+addToDisplay('9');
+});
+document.body.appendChild(btn9);
+
+const btn13 = document.createElement("button");
+btn13.innerHTML = "+";
+btn13.addEventListener("click", function(){
+addToDisplay('+');
+});
+document.body.appendChild(btn13);
+
+
+document.body.appendChild(document.createElement("br"));
+
+const btn16 = document.createElement("button");
+btn16.innerHTML = ".";
+btn16.addEventListener("click", function(){
+addToDisplay('.');
+});
+document.body.appendChild(btn16);
+
+const btn0 = document.createElement("button");
+btn0.innerHTML = "0";
+btn0.addEventListener("click", function(){
+addToDisplay('0');
+});
+document.body.appendChild(btn0);
+
+const btn14 = document.createElement("button");
+btn14.innerHTML = "=";
+btn14.addEventListener("click", function(){
+addToDisplay('=');
+});
+document.body.appendChild(btn14);
+
+
+function addToDisplay(val){
+  if(val=="="){
+    display.value = eval(value);
+    value = display.value;
+  } else if(val=="AC"){
+    value="";
+    display.value="";
+  } else {
+    value += val;
+    display.value = value;
+  }
+}
+
+
+</script>
+
+<style>
+  button {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(99, 99, 111);
+    color: black;
+    font-size: 18px;
+    margin: 2px;
+    border-radius: 10px;
+  }
+#display{
+  font-size: 32px;
+  width: 205px; 
+  height: 40px; 
+  text-align: right;
+  border: 5px solid rgb(32, 23, 23);
+
+}
+body{
+ border: 5px solid;
+ width: 216px;
+}
+
+
+
+</style>
