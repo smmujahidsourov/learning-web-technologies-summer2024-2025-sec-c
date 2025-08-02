@@ -21,50 +21,57 @@
 </form>
 
 <script>
-let emailError = document.getElementById("emailError");
+
     
+  let emailError = document.getElementById("emailError");
+      
 
-function validateEmail(isSubmit = false) {
-  let email = document.getElementById("email").value.trim();
+  function validateEmail(isSubmit = false) {
+    let email = document.getElementById("email").value.trim();
 
-  if(email === "") {
-    emailError.textContent = "Email cannot be empty";
-    emailError.style.color = "red";
-    return false;
-  } 
+    if(email === "") {
+      emailError.textContent = "Email cannot be empty";
+      emailError.style.color = "red";
+      return false;
+    } 
 
-  let atPos = email.indexOf("@");
-  let dotPos = email.lastIndexOf(".");
+    let atPos = email.indexOf("@");
+    let dotPos = email.lastIndexOf(".");
 
-  if(!email.includes('@') || !email.endsWith('.com') || email.indexOf(".com") !== dotPos ) {
-    emailError.textContent = "Enter Valid Email";
-    emailError.style.color = "red";
+    if(!email.includes('@') || !email.endsWith('.com') || email.indexOf(".com") !== dotPos ) {
+      emailError.textContent = "Enter Valid Email";
+      emailError.style.color = "red";
+      return false;
+    }
+
+    let domain = email.substring(atPos+1, dotPos);
+    if (domain.length < 1) {
+      emailError.textContent = "Enter Valid Email";
+      emailError.style.color = "red";
+      return false;
+    }
+
+    let firstCom = email.indexOf(".com");
+    let lastCom = email.lastIndexOf(".com");
+    if (firstCom !== lastCom) {
+      emailError.textContent = "Enter Valid Email";
+      emailError.style.color = "red";
+      return false;
+    }
+
+    emailError.textContent = "";
+
+    if (isSubmit) {
+      alert("Email submitted successfully!");
+      return true;
+    }
     return false;
   }
 
-  let domain = email.substring(atPos+1, dotPos);
-  if (domain.length < 1) {
-    emailError.textContent = "Enter Valid Email";
-    emailError.style.color = "red";
-    return false;
-  }
+  document.getElementById("ibutton").addEventListener("click", function() {
+    alert("Hint: Use a valid email like example@domain.com");
+  });
 
-  let firstCom = email.indexOf(".com");
-  let lastCom = email.lastIndexOf(".com");
-  if (firstCom !== lastCom) {
-    emailError.textContent = "Enter Valid Email";
-    emailError.style.color = "red";
-    return false;
-  }
-
-  emailError.textContent = "";
-
-  if (isSubmit) {
-    alert("Email submitted successfully!");
-    return true;
-  }
-  return false;
-}
 </script>
 
 </body>
